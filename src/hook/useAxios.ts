@@ -9,6 +9,7 @@ interface UseAxiosProps {
   body?: any;
   headers?: Record<string, string>;
 }
+const hello="hello"
 
 const useAxios = ({
   url,
