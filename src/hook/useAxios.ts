@@ -1,67 +1,65 @@
 import { useState, useEffect } from "react";
-import axios, { AxiosRequestConfig, AxiosResponse } from "axios";
-
-type AxiosData = any; // Define a type for the data (or use a generic type if possible)
+import axios, { AxiosRequestConfig } from "axios";
 
 interface UseAxiosProps {
   url: string;
-  method: "GET" | "POST" | "PUT" | "DELETE";
+  method: "get" | "post" | "put" | "delete";
   body?: any;
   headers?: Record<string, string>;
 }
-const hello="hello"
 
-const useAxios = ({
-  url,
-  method,
-  body = null,
-  headers = {},
-}: UseAxiosProps) => {
-  const [data, setData] = useState<AxiosData | null>(null);
+const useAxios = ({ url, method, body = null, headers }: UseAxiosProps) => {
+  const [data, setData] = useState([]);
   const [error, setError] = useState<string | null>(null);
-  const [loading, setLoading] = useState<boolean>(true);
+  const [loading, setLoading] = useState<boolean>(false);
+
+  const fetchData = async () => {
+    try {
+      setLoading(true);
+      const config: AxiosRequestConfig = {
+        headers: headers || {},
+      };
+
+      if (method === "get") {
+        console.log("Making GET request");
+        const response = await axios[method](url, config);
+
+        if (response.data?.status === "success") {
+          setData(response.data.data);
+          setError("");
+        }
+      } else {
+        //post put delete
+        const response = await axios[method](url, body);
+        if (response.data?.status === "success") {
+          setData(response.data);
+        }
+      }
+    } catch (err) {
+      if (axios.isAxiosError(err)) {
+        const errorMessage =
+          err.response?.data?.error?.errors?.[0]?.msg ||
+          err.response?.data?.message;
+        setError(errorMessage);
+      }
+    } finally {
+      setLoading(false);
+    }
+  };
 
   useEffect(() => {
-    const cancelTokenSource = axios.CancelToken.source();
+    if (method === "get") {
+      fetchData();
+    }
+  }, [method, url, body, headers]);
 
-    const fetchData = async () => {
-      try {
-        setLoading(true);
-        const config: AxiosRequestConfig = {
-          headers,
-          cancelToken: cancelTokenSource.token,
-        };
+  const submitData = () => {
+    if (["post", "put", "delete"].includes(method)) {
+      fetchData();
+    }
+  };
 
-        let response: AxiosResponse<AxiosData>;
-
-        // Dynamically call the appropriate axios method based on the provided `method`
-        response = await axios[method](url, body, config);
-
-        setData(response.data);
-        setError(null);
-      } catch (err) {
-        if (axios.isCancel(err)) {
-          console.log("Request canceled:", err.message);
-        } else {
-          setError(err.message || "An error occurred");
-        }
-        setData(null);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchData();
-
-    // Cleanup function: Cancel the request when the component unmounts
-    return () => {
-      cancelTokenSource.cancel(
-        "Request canceled due to component unmounting or re-rendering."
-      );
-    };
-  }, [url, method, body, headers]);
-
-  return { data, error, loading };
+  return { data, error, loading, submitData };
 };
 
 export default useAxios;
