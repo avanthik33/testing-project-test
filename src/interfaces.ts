@@ -20,3 +20,12 @@ export interface SignUpFormData {
   password: string;
   confirmPassword: string;
 }
+
+export interface Products {
+  name: string;
+  description: string;
+}
+
+export interface ProductsProps {
+  products: Products[];
+}
