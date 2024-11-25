@@ -1,15 +1,13 @@
 import { useState } from "react";
 import { signinFormData } from "../interfaces";
-import useAxios from "../hook/useAxios";
 import Error from "../components/Error";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
+import useSignin from "../hooks/useSignin";
 const Signin: React.FC = () => {
   const [formData, setFormdata] = useState<signinFormData>({
     email: "",
     password: "",
   });
-
-  const navigate = useNavigate();
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setFormdata((prevInput) => ({
@@ -18,26 +16,19 @@ const Signin: React.FC = () => {
     }));
   };
 
-  const Api = "http://localhost:3001/user/login";
-  const { error, loading, submitData, data } = useAxios({
-    url: Api,
-    method: "post",
-    body: formData,
-  });
+  const { error, loading, signin } = useSignin({ formData });
 
-  const formsubmitHandler = (event: React.FormEvent) => {
+  const formSubmitHandler = async (event: React.FormEvent) => {
     event.preventDefault();
-    submitData();
-    if (data.status === "success") {
-      navigate("/home");
-    }
+    signin();
   };
+
   return (
     <>
       {error && <Error message={error} />}
       <div className="flex items-center justify-center  bg-gray-700 h-screen">
         <div className="w-full max-w-lg p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-6 md:p-8 dark:bg-gray-800 dark:border-gray-700">
-          <form className="space-y-6" onSubmit={formsubmitHandler}>
+          <form className="space-y-6" onSubmit={formSubmitHandler}>
             <h5 className="text-xl font-medium text-gray-900 dark:text-white">
               Sign in to our platform
             </h5>
