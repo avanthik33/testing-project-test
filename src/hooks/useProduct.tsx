@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 
-const useProduct = ({ formData }) => {
+export const useProduct = ({ formData }) => {
   console.log("This is proops:", formData);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
@@ -75,5 +75,3 @@ const useProduct = ({ formData }) => {
 
   return { addProduct, loading, error, data };
 };
-
-export default useProduct;
