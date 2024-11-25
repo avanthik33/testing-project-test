@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import useProduct from "../hooks/useProduct";
 import Error from "../components/Error";
 import Products from "../components/Products";
