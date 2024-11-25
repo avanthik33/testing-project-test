@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import useProduct from "../hooks/useProduct";
+import { useProduct } from "../hooks/useProduct";
 import Error from "../components/Error";
 import Products from "../components/Products";
 
@@ -38,7 +38,7 @@ const Home: React.FC = () => {
             Add Product
           </h1>
 
-          <form onSubmit={handleFormSubmit}>
+          <form role="form" onSubmit={handleFormSubmit}>
             <div className="mb-4">
               <label
                 htmlFor="name"
