@@ -1,11 +1,10 @@
 import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { SignUpFormData } from "../interfaces";
-import useAxios from "../hook/useAxios";
 import Error from "../components/Error";
+import useSignup from "../hooks/useSignup";
 
 const Signup: React.FC = () => {
-  const navigate = useNavigate();
   const [formData, setFormData] = useState<SignUpFormData>({
     username: "",
     email: "",
@@ -20,26 +19,15 @@ const Signup: React.FC = () => {
     }));
   };
 
-  const Api = "http://localhost:3001/user/register";
-  const { loading, error, submitData, data } = useAxios({
-    url: Api,
-    method: "post",
-    body: formData,
-  });
-
+  const { error, loading, signup } = useSignup({ formData });
   const formSubmitHandler = (event: React.FormEvent) => {
     event.preventDefault();
     if (formData.password !== formData.confirmPassword) {
       alert("password and confirm password in not match!");
-      return false;
+      return;
     }
-    submitData();
-    if (data.status === "success") {
-      navigate("/");
-    }
+    signup();
   };
-
-  console.log(error);
 
   return (
     <>
