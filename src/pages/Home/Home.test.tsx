@@ -1,8 +1,8 @@
 import { render, screen } from "@testing-library/react";
 import { describe, expect, it, vi } from "vitest";
-import Home from "./Home";
 import userEvent from "@testing-library/user-event";
-import * as useProduct from "../hooks/useProduct";
+import * as useProduct from "../../hooks/useProduct";
+import Home from "./Home";
 
 describe("Home component", () => {
   it("should show add product heading", () => {
@@ -44,7 +44,6 @@ describe("Home component", () => {
       loading: false,
       error: "",
       addProduct: mockAddFn,
-      data: [],
     });
     render(<Home />);
     const button = screen.getByRole("button", { name: "Add Product" });
@@ -63,7 +62,6 @@ describe("Home component", () => {
       loading: true,
       error: "somthing error",
       addProduct: mockAddfn,
-      data: [],
     });
     userEvent.setup();
     render(<Home />);
@@ -77,7 +75,6 @@ describe("Home component", () => {
     const mockFn = vi.fn();
     vi.spyOn(useProduct, "useProduct").mockReturnValue({
       loading: true,
-      data: [],
       addProduct: mockFn,
       error: "",
     });

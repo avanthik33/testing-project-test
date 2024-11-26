@@ -1,8 +1,10 @@
 import { useState } from "react";
-import { signinFormData } from "../interfaces";
-import Error from "../components/Error";
 import { Link } from "react-router-dom";
-import { useSignin } from "../hooks/useSignin";
+import { signinFormData } from "../../interfaces";
+import { useSignin } from "../../hooks/useSignin";
+import Error from "../../components/Error/Error";
+import CircularProgress from "@mui/material/CircularProgress";
+
 const Signin: React.FC = () => {
   const [formData, setFormdata] = useState<signinFormData>({
     email: "",
@@ -22,7 +24,6 @@ const Signin: React.FC = () => {
     event.preventDefault();
     signin();
   };
-
 
   return (
     <>
@@ -69,10 +70,16 @@ const Signin: React.FC = () => {
 
             <button
               type="submit"
-              disabled={!!loading}
+              disabled={
+                !!loading || formData.email === "" || formData.password === ""
+              }
               className="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
             >
-              Login to your account
+              {loading ? (
+                <CircularProgress color="secondary" size="20px" />
+              ) : (
+                "Login to your account"
+              )}
             </button>
             <div className="text-sm font-medium text-gray-500 dark:text-gray-300">
               Not registered?

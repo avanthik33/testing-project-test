@@ -1,3 +1,5 @@
+import { ReactNode } from "react";
+
 export interface signinFormData {
   email: string;
   password: string;
@@ -18,6 +20,7 @@ export interface SignUpFormData {
   username: string;
   email: string;
   password: string;
+  phone: string;
   confirmPassword: string;
 }
 
@@ -28,4 +31,8 @@ export interface Products {
 
 export interface ProductsProps {
   products: Products[];
+}
+
+export interface ProtectedRouteProps {
+  children: ReactNode;
 }

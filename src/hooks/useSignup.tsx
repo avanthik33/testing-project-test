@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useState } from "react";
-import { replace, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 export const useSignup = ({ formData }) => {
   const [loading, setLoading] = useState(false);
@@ -35,4 +35,3 @@ export const useSignup = ({ formData }) => {
 
   return { error, loading, signup };
 };
-
