@@ -129,6 +129,9 @@ describe("Signup component", () => {
     await userEvent.type(phoneNo, "0000999909");
     await userEvent.type(emailAddress, "avnthik@gmail.com");
 
+    const button = screen.getByRole("button");
+    expect(button).not.toBeDisabled();
+
     const form = screen.getByRole("form");
     await fireEvent.submit(form);
     expect(mockSignup).toHaveBeenCalledTimes(1);
