@@ -2,7 +2,7 @@ import axios from "axios";
 import { useState } from "react";
 import { replace, useNavigate } from "react-router-dom";
 
-const useSignup = ({ formData }) => {
+export const useSignup = ({ formData }) => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const navigate = useNavigate();
@@ -36,4 +36,3 @@ const useSignup = ({ formData }) => {
   return { error, loading, signup };
 };
 
-export default useSignup;

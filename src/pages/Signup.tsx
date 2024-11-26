@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { SignUpFormData } from "../interfaces";
 import Error from "../components/Error";
-import useSignup from "../hooks/useSignup";
+import {useSignup} from "../hooks/useSignup";
 
 const Signup: React.FC = () => {
   const [formData, setFormData] = useState<SignUpFormData>({
@@ -35,7 +35,11 @@ const Signup: React.FC = () => {
       <div className="bg-gray-700">
         <div className="flex items-center flex-col justify-center h-screen">
           <h1 className="text-white text-3xl font-bold m-2">Signup</h1>
-          <form onSubmit={formSubmitHandler} className="max-w-md mx-auto">
+          <form
+            role="form"
+            onSubmit={formSubmitHandler}
+            className="max-w-md mx-auto"
+          >
             <div className="relative z-0 w-full mb-5 group ">
               <input
                 type="email"
