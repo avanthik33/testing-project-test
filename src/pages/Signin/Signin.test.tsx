@@ -1,9 +1,9 @@
 import { fireEvent, render, screen } from "@testing-library/react";
 import { describe, expect, it, vi } from "vitest";
-import Signin from "./SIgnin";
 import { BrowserRouter } from "react-router-dom";
-import * as customHook from "../hooks/useSignin";
+import * as customHook from "../../hooks/useSignin";
 import userEvent from "@testing-library/user-event";
+import Signin from "./SIgnin";
 
 describe("Signin component", () => {
   it("should show heading 'Sign in to our platform'", () => {

@@ -3,7 +3,7 @@ import { describe, expect, it, vi } from "vitest";
 import Signup from "./Signup";
 import { BrowserRouter } from "react-router-dom";
 import userEvent from "@testing-library/user-event";
-import * as signupHook from "../hooks/useSignup";
+import * as signupHook from "../../hooks/useSignup";
 
 describe("Signup component", () => {
   it("should display 'signup' heading", () => {

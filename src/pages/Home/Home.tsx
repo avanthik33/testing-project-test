@@ -1,9 +1,10 @@
 import React, { useState } from "react";
-import { useProduct } from "../hooks/useProduct";
-import Error from "../components/Error";
-import Products from "../components/Products";
+import Error from "../../components/Error/Error";
+import { useProduct } from "../../hooks/useProduct";
+import Logout from "../../components/Logout";
 
 const Home: React.FC = () => {
+  console.log("<Home>");
   const [formData, setFormData] = useState({
     name: "",
     description: "",
@@ -16,7 +17,7 @@ const Home: React.FC = () => {
     }));
   };
 
-  const { error, loading, addProduct, data } = useProduct({
+  const { error, loading, addProduct } = useProduct({
     formData,
   });
 
@@ -32,7 +33,12 @@ const Home: React.FC = () => {
   return (
     <>
       {error && <Error message={error} />}
-      <div className="pt-9">
+      <div className="relative pt-9 bg-gray-300 h-screen">
+        {/* Logout Button */}
+        <div className="absolute top-4 right-4">
+          <Logout />
+        </div>
+
         <div className="max-w-md mx-auto p-3 bg-white rounded-lg shadow-md">
           <h1 className="text-3xl font-bold text-center text-indigo-600 mb-6">
             Add Product
@@ -83,7 +89,6 @@ const Home: React.FC = () => {
           </form>
         </div>
       </div>
-      <Products products={data} />
     </>
   );
 };
