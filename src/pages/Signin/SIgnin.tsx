@@ -10,6 +10,7 @@ const Signin: React.FC = () => {
     email: "",
     password: "",
   });
+  const { error, loading, signin } = useSignin({ formData });
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setFormdata((prevInput) => ({
@@ -17,8 +18,6 @@ const Signin: React.FC = () => {
       [event.target.name]: event.target.value,
     }));
   };
-
-  const { error, loading, signin } = useSignin({ formData });
 
   const formSubmitHandler = async (event: React.FormEvent) => {
     event.preventDefault();

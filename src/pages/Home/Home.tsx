@@ -9,6 +9,9 @@ const Home: React.FC = () => {
     name: "",
     description: "",
   });
+  const { error, loading, addProduct } = useProduct({
+    formData,
+  });
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setFormData((prevInput) => ({
@@ -16,10 +19,6 @@ const Home: React.FC = () => {
       [event.target.name]: event.target.value,
     }));
   };
-
-  const { error, loading, addProduct } = useProduct({
-    formData,
-  });
 
   const handleFormSubmit = (event: React.FormEvent) => {
     event.preventDefault();
@@ -34,7 +33,6 @@ const Home: React.FC = () => {
     <>
       {error && <Error message={error} />}
       <div className="relative pt-9 bg-gray-300 h-screen">
-        {/* Logout Button */}
         <div className="absolute top-4 right-4">
           <Logout />
         </div>
