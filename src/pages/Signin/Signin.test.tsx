@@ -70,11 +70,11 @@ describe("Signin component", () => {
     render(<Signin />, { wrapper: BrowserRouter });
 
     const signinForm = screen.getByRole("form");
-    const button = screen.getByRole("button", {
-      name: "Login to your account",
-    });
-    await fireEvent.submit(signinForm);
+    const button = screen.getByRole("button");
+    expect(screen.getByRole("progressbar")).toBeInTheDocument();
     expect(button).toBeDisabled();
+    await fireEvent.submit(signinForm);
+    expect(mockSignin).toHaveBeenCalled();
   });
 
   it("should check handlInputChange fn", async () => {

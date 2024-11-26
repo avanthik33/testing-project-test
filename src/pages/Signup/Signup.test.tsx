@@ -133,4 +133,36 @@ describe("Signup component", () => {
     await fireEvent.submit(form);
     expect(mockSignup).toHaveBeenCalledTimes(1);
   });
+
+  it("should the signup button disabled when no input or loading", async () => {
+    const mockSignup = vi.fn();
+    vi.spyOn(signupHook, "useSignup").mockReturnValue({
+      error: "",
+      loading: true,
+      signup: mockSignup,
+    });
+    userEvent.setup();
+    render(<Signup />, { wrapper: BrowserRouter });
+
+    const password = screen.getByLabelText("Password");
+    const firstName = screen.getByLabelText("First name");
+    const phoneNo = screen.getByLabelText("Phone number");
+    const emailAddress = screen.getByLabelText("Email address");
+    const ConfirmPassword = screen.getByLabelText("Confirm password");
+
+    fireEvent.change(password, { target: { value: "" } });
+    fireEvent.change(firstName, { target: { value: "" } });
+    fireEvent.change(phoneNo, { target: { value: "" } });
+    fireEvent.change(emailAddress, { target: { value: "" } });
+    fireEvent.change(ConfirmPassword, { target: { value: "" } });
+
+    const form = screen.getByRole("form");
+    const button = screen.getByRole("button");
+    const progressBar = screen.getByRole("progressbar");
+    expect(button).toBeDisabled();
+    expect(progressBar).toBeInTheDocument();
+
+    await fireEvent.submit(form);
+    expect(mockSignup).not.toHaveBeenCalled();
+  });
 });
