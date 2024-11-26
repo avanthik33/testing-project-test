@@ -24,9 +24,9 @@ describe("Signup component", () => {
     expect(firstName).toBeInTheDocument();
     const lastName = screen.getByLabelText("Last name");
     expect(lastName).toBeInTheDocument();
-    const phoneNo = screen.getByLabelText("Phone number (123-456-7890)");
+    const phoneNo = screen.getByLabelText("Phone number");
     expect(phoneNo).toBeInTheDocument();
-    const company = screen.getByLabelText("Company (Ex. Google)");
+    const company = screen.getByLabelText("Company");
     expect(company).toBeInTheDocument();
     const button = screen.getByRole("button", { name: "Signup" });
     expect(button).toBeInTheDocument();
@@ -43,8 +43,8 @@ describe("Signup component", () => {
     const ConfirmPassword = screen.getByLabelText("Confirm password");
     const firstName = screen.getByLabelText("First name");
     const lastName = screen.getByLabelText("Last name");
-    const phoneNo = screen.getByLabelText("Phone number (123-456-7890)");
-    const company = screen.getByLabelText("Company (Ex. Google)");
+    const phoneNo = screen.getByLabelText("Phone number");
+    const company = screen.getByLabelText("Company");
 
     await userEvent.type(emailAddress, "avanthik@gmail.com");
     await userEvent.type(password, "avanthik");
@@ -80,7 +80,7 @@ describe("Signup component", () => {
     );
   });
 
-  it("should submit signup form", async () => {
+  it("should not submit signup form when not validated", async () => {
     const mockSignup = vi.fn();
     vi.spyOn(signupHook, "useSignup").mockReturnValue({
       error: "",
@@ -91,9 +91,43 @@ describe("Signup component", () => {
     render(<Signup />, { wrapper: BrowserRouter });
 
     const password = screen.getByLabelText("Password");
+    const firstName = screen.getByLabelText("First name");
+    const phoneNo = screen.getByLabelText("Phone number");
     const ConfirmPassword = screen.getByLabelText("Confirm password");
+    const emailAddress = screen.getByLabelText("Email address");
+
     await userEvent.type(password, "h");
     await userEvent.type(ConfirmPassword, "h");
+    await userEvent.type(firstName, "av");
+    await userEvent.type(phoneNo, "09099");
+    await userEvent.type(emailAddress, "avanthik@j");
+
+    const form = screen.getByRole("form");
+    await fireEvent.submit(form);
+    expect(mockSignup).not.toHaveBeenCalledTimes(1);
+  });
+
+  it("should submit signup form when validated", async () => {
+    const mockSignup = vi.fn();
+    vi.spyOn(signupHook, "useSignup").mockReturnValue({
+      error: "",
+      loading: false,
+      signup: mockSignup,
+    });
+    userEvent.setup();
+    render(<Signup />, { wrapper: BrowserRouter });
+
+    const password = screen.getByLabelText("Password");
+    const firstName = screen.getByLabelText("First name");
+    const phoneNo = screen.getByLabelText("Phone number");
+    const emailAddress = screen.getByLabelText("Email address");
+    const ConfirmPassword = screen.getByLabelText("Confirm password");
+
+    await userEvent.type(password, "avanthik");
+    await userEvent.type(ConfirmPassword, "avanthik");
+    await userEvent.type(firstName, "avanthik");
+    await userEvent.type(phoneNo, "0000999909");
+    await userEvent.type(emailAddress, "avnthik@gmail.com");
 
     const form = screen.getByRole("form");
     await fireEvent.submit(form);
