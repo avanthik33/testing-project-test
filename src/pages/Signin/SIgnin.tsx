@@ -22,6 +22,7 @@ const Signin: React.FC = () => {
   const formSubmitHandler = async (event: React.FormEvent) => {
     event.preventDefault();
     signin();
+    alert("hello")
   };
 
   return (
