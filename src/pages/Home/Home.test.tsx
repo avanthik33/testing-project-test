@@ -3,16 +3,17 @@ import { describe, expect, it, vi } from "vitest";
 import userEvent from "@testing-library/user-event";
 import * as useProduct from "../../hooks/useProduct";
 import Home from "./Home";
+import { BrowserRouter } from "react-router-dom";
 
 describe("Home component", () => {
   it("should show add product heading", () => {
-    render(<Home />);
+    render(<Home />, { wrapper: BrowserRouter });
     const heading = screen.getByRole("heading", { name: "Add Product" });
     expect(heading).toBeInTheDocument();
   });
 
   it("should show the addproduct form", () => {
-    render(<Home />);
+    render(<Home />, { wrapper: BrowserRouter });
 
     const name = screen.getByLabelText("Product Name");
     const description = screen.getByLabelText("Description");
@@ -25,7 +26,7 @@ describe("Home component", () => {
 
   it("should check handlInputChange fn", async () => {
     userEvent.setup();
-    render(<Home />);
+    render(<Home />, { wrapper: BrowserRouter });
 
     const nameField = screen.getByLabelText("Product Name");
     const descriptionField = screen.getByLabelText("Description");
@@ -45,13 +46,13 @@ describe("Home component", () => {
       error: "",
       addProduct: mockAddFn,
     });
-    render(<Home />);
+    render(<Home />, { wrapper: BrowserRouter });
     const button = screen.getByRole("button", { name: "Add Product" });
     const nameFiled = screen.getByLabelText("Product Name");
     const descriptionField = screen.getByLabelText("Description");
     await userEvent.click(button);
-    expect(mockAddFn).toHaveBeenCalledTimes(1);
 
+    expect(mockAddFn).toHaveBeenCalledTimes(1);
     expect(nameFiled).toHaveValue("");
     expect(descriptionField).toHaveValue("");
   });
@@ -59,12 +60,12 @@ describe("Home component", () => {
   it("should show error when there is an error", async () => {
     const mockAddfn = vi.fn();
     vi.spyOn(useProduct, "useProduct").mockReturnValue({
-      loading: true,
+      loading: false,
       error: "somthing error",
       addProduct: mockAddfn,
     });
     userEvent.setup();
-    render(<Home />);
+    render(<Home />, { wrapper: BrowserRouter });
     const button = screen.getByRole("button", { name: "Add Product" });
     await userEvent.click(button);
     const errorMessage = screen.getByText("somthing error");
@@ -79,7 +80,7 @@ describe("Home component", () => {
       error: "",
     });
     userEvent.setup();
-    render(<Home />);
+    render(<Home />, { wrapper: BrowserRouter });
     const button = screen.getByRole("button", { name: /add product/i });
     await userEvent.click(button);
     expect(button).toBeDisabled();
