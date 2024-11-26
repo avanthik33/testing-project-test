@@ -2,7 +2,7 @@ import axios from "axios";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-const useSignin = ({ formData }) => {
+export const useSignin = ({ formData }) => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const navigate = useNavigate();
@@ -36,5 +36,3 @@ const useSignin = ({ formData }) => {
   };
   return { signin, loading, error };
 };
-
-export default useSignin;

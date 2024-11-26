@@ -48,11 +48,16 @@ describe("Home component", () => {
     });
     render(<Home />);
     const button = screen.getByRole("button", { name: "Add Product" });
+    const nameFiled = screen.getByLabelText("Product Name");
+    const descriptionField = screen.getByLabelText("Description");
     await userEvent.click(button);
     expect(mockAddFn).toHaveBeenCalledTimes(1);
+
+    expect(nameFiled).toHaveValue("");
+    expect(descriptionField).toHaveValue("");
   });
 
-  it("should show error when there is an error", () => {
+  it("should show error when there is an error", async () => {
     const mockAddfn = vi.fn();
     vi.spyOn(useProduct, "useProduct").mockReturnValue({
       loading: true,
@@ -60,12 +65,15 @@ describe("Home component", () => {
       addProduct: mockAddfn,
       data: [],
     });
+    userEvent.setup();
     render(<Home />);
+    const button = screen.getByRole("button", { name: "Add Product" });
+    await userEvent.click(button);
     const errorMessage = screen.getByText("somthing error");
     expect(errorMessage).toBeInTheDocument();
   });
 
-  it("should disable the add button when loading", () => {
+  it("should disable the add button when loading", async () => {
     const mockFn = vi.fn();
     vi.spyOn(useProduct, "useProduct").mockReturnValue({
       loading: true,
@@ -73,8 +81,10 @@ describe("Home component", () => {
       addProduct: mockFn,
       error: "",
     });
+    userEvent.setup();
     render(<Home />);
     const button = screen.getByRole("button", { name: /add product/i });
+    await userEvent.click(button);
     expect(button).toBeDisabled();
   });
 });

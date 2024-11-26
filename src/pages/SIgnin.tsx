@@ -2,7 +2,7 @@ import { useState } from "react";
 import { signinFormData } from "../interfaces";
 import Error from "../components/Error";
 import { Link } from "react-router-dom";
-import useSignin from "../hooks/useSignin";
+import { useSignin } from "../hooks/useSignin";
 const Signin: React.FC = () => {
   const [formData, setFormdata] = useState<signinFormData>({
     email: "",
@@ -23,12 +23,13 @@ const Signin: React.FC = () => {
     signin();
   };
 
+
   return (
     <>
       {error && <Error message={error} />}
       <div className="flex items-center justify-center  bg-gray-700 h-screen">
         <div className="w-full max-w-lg p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-6 md:p-8 dark:bg-gray-800 dark:border-gray-700">
-          <form className="space-y-6" onSubmit={formSubmitHandler}>
+          <form role="form" className="space-y-6" onSubmit={formSubmitHandler}>
             <h5 className="text-xl font-medium text-gray-900 dark:text-white">
               Sign in to our platform
             </h5>
@@ -68,7 +69,7 @@ const Signin: React.FC = () => {
 
             <button
               type="submit"
-              disabled={loading}
+              disabled={!!loading}
               className="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
             >
               Login to your account
