@@ -1,9 +1,9 @@
 import { describe, expect, it } from "vitest";
-import { server } from "../mocks/server";
+import { server } from "../../mocks/server";
 import { http, HttpResponse } from "msw";
 import { act, renderHook } from "@testing-library/react";
-import { useSignin } from "./useSignin";
 import { BrowserRouter } from "react-router-dom";
+import { useSignin } from "./useSignin";
 
 describe("useSignin hook", () => {
   it("should signin", async () => {
@@ -99,6 +99,6 @@ describe("useSignin hook", () => {
       await result.current.signin();
     });
 
-    expect(result.current.error).toBe("somthing went wrong");
+    expect(result.current.error).toBe("server error");
   });
 });

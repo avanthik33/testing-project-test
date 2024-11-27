@@ -1,7 +1,7 @@
 import { fireEvent, render, screen } from "@testing-library/react";
 import { describe, expect, it, vi } from "vitest";
 import { BrowserRouter } from "react-router-dom";
-import * as customHook from "../../hooks/useSignin";
+import * as customHook from "../../hooks/useSignin/useSignin";
 import userEvent from "@testing-library/user-event";
 import Signin from "./SIgnin";
 

@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
-import { ProtectedRouteProps } from "../interfaces";
 import { useNavigate } from "react-router-dom";
+import { ProtectedRouteProps } from "../interfaces";
 
 const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ children }) => {
   const loggedUser = localStorage.getItem("token");
