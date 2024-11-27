@@ -5,6 +5,7 @@ export const validateUserInput = ({
   email,
   password,
   phone,
+  confirmPassword,
 }: SignUpFormData) => {
   if (!username) {
     alert("Username is required.");
@@ -37,6 +38,10 @@ export const validateUserInput = ({
     return false;
   } else if (password.length < 8) {
     alert("Password must be at least 8 characters long.");
+    return false;
+  }
+  if (password !== confirmPassword) {
+    alert("password and confirm password in not match!");
     return false;
   }
   return true;
