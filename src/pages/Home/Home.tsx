@@ -2,10 +2,11 @@ import React, { useState } from "react";
 import Error from "../../components/Error/Error";
 import { useProduct } from "../../hooks/useProduct";
 import Logout from "../../components/Logout";
+import { Products } from "../../interfaces";
 
 const Home: React.FC = () => {
   console.log("<Home>");
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState<Products>({
     name: "",
     description: "",
   });

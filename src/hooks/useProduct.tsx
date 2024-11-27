@@ -1,7 +1,8 @@
 import axios from "axios";
 import { useState } from "react";
+import { Products } from "../interfaces";
 
-export const useProduct = ({ formData }) => {
+export const useProduct = ({ name, description }: Products) => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
@@ -11,12 +12,16 @@ export const useProduct = ({ formData }) => {
     const Api = "http://localhost:3001/products/addProduct";
     try {
       setLoading(true);
-      const response = await axios.post(Api, formData, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-          "Content-Type": "application/json",
-        },
-      });
+      const response = await axios.post(
+        Api,
+        { name, description },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+          },
+        }
+      );
 
       if (response.data.status === "success") {
         setError("");
@@ -27,12 +32,10 @@ export const useProduct = ({ formData }) => {
     } catch (error) {
       if (axios.isAxiosError(error)) {
         setError(
-          error.response
-            ? error.response.data.message
+          error.response?.data.message
+            ? error.response.data?.message
             : "somthing went wrong in fetching products"
         );
-      } else {
-        setError("unexpected error occured. Please try again later");
       }
     } finally {
       setLoading(false);
