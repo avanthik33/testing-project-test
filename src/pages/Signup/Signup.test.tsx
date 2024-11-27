@@ -6,24 +6,31 @@ import userEvent from "@testing-library/user-event";
 import * as signupHook from "../../hooks/useSignup/useSignup";
 
 describe("Signup component", () => {
-  it("should display 'signup' heading", () => {
+  const renderSignup = () => {
     render(<Signup />, { wrapper: BrowserRouter });
+  };
+
+  const labelNames = [
+    "Email address",
+    "Password",
+    "Confirm password",
+    "First name",
+    "Phone number",
+  ];
+
+  it("should display 'signup' heading", () => {
+    renderSignup();
+
     const heading = screen.getByRole("heading", { name: "Signup" });
     expect(heading).toBeInTheDocument();
   });
 
   it("should display signup form", () => {
-    render(<Signup />, { wrapper: BrowserRouter });
-    const emailAddress = screen.getByLabelText("Email address");
-    expect(emailAddress).toBeInTheDocument();
-    const password = screen.getByLabelText("Password");
-    expect(password).toBeInTheDocument();
-    const ConfirmPassword = screen.getByLabelText("Confirm password");
-    expect(ConfirmPassword).toBeInTheDocument();
-    const firstName = screen.getByLabelText("First name");
-    expect(firstName).toBeInTheDocument();
-    const phoneNo = screen.getByLabelText("Phone number");
-    expect(phoneNo).toBeInTheDocument();
+    renderSignup();
+
+    labelNames.forEach((label) => {
+      expect(screen.getByLabelText(label)).toBeInTheDocument();
+    });
     const button = screen.getByRole("button", { name: "Signup" });
     expect(button).toBeInTheDocument();
     const link = screen.getByRole("link", { name: "Signin here" });
@@ -32,25 +39,21 @@ describe("Signup component", () => {
 
   it("should check handlInputChange fn", async () => {
     userEvent.setup();
-    render(<Signup />, { wrapper: BrowserRouter });
+    renderSignup();
 
-    const emailAddress = screen.getByLabelText("Email address");
-    const password = screen.getByLabelText("Password");
-    const ConfirmPassword = screen.getByLabelText("Confirm password");
-    const firstName = screen.getByLabelText("First name");
-    const phoneNo = screen.getByLabelText("Phone number");
+    const inputText = [
+      "avanthik@gmail.com",
+      "avanthik",
+      "avanthik",
+      "avanthik",
+      "0099090909",
+    ];
 
-    await userEvent.type(emailAddress, "avanthik@gmail.com");
-    await userEvent.type(password, "avanthik");
-    await userEvent.type(ConfirmPassword, "avanthik");
-    await userEvent.type(firstName, "avanthik");
-    await userEvent.type(phoneNo, "0099090909");
-
-    expect(emailAddress).toHaveValue("avanthik@gmail.com");
-    expect(password).toHaveValue("avanthik");
-    expect(ConfirmPassword).toHaveValue("avanthik");
-    expect(firstName).toHaveValue("avanthik");
-    expect(phoneNo).toHaveValue("0099090909");
+    for (let i = 0; i < labelNames.length; i++) {
+      const item = screen.getByLabelText(labelNames[i]);
+      await userEvent.type(item, inputText[i]);
+      expect(item).toHaveValue(inputText[i]);
+    }
   });
 
   it("should not submit signup form when not validated", async () => {
@@ -61,23 +64,16 @@ describe("Signup component", () => {
       signup: mockSignup,
     });
     userEvent.setup();
-    render(<Signup />, { wrapper: BrowserRouter });
+    renderSignup();
 
-    const password = screen.getByLabelText("Password");
-    const firstName = screen.getByLabelText("First name");
-    const phoneNo = screen.getByLabelText("Phone number");
-    const ConfirmPassword = screen.getByLabelText("Confirm password");
-    const emailAddress = screen.getByLabelText("Email address");
-
-    await userEvent.type(password, "h");
-    await userEvent.type(ConfirmPassword, "h");
-    await userEvent.type(firstName, "av");
-    await userEvent.type(phoneNo, "09099");
-    await userEvent.type(emailAddress, "avanthik@j");
-
+    const incorrectInputs = ["h", "h", "av", "09099", "avanthik@j"];
+    for (let i = 0; i < labelNames.length; i++) {
+      const item = screen.getByLabelText(labelNames[i]);
+      await userEvent.type(item, incorrectInputs[i]);
+    }
     const form = screen.getByRole("form");
     await fireEvent.submit(form);
-    expect(mockSignup).not.toHaveBeenCalledTimes(1);
+    expect(mockSignup).not.toHaveBeenCalled();
   });
 
   it("should submit signup form when validated", async () => {
@@ -88,23 +84,21 @@ describe("Signup component", () => {
       signup: mockSignup,
     });
     userEvent.setup();
-    render(<Signup />, { wrapper: BrowserRouter });
+    renderSignup();
 
-    const password = screen.getByLabelText("Password");
-    const firstName = screen.getByLabelText("First name");
-    const phoneNo = screen.getByLabelText("Phone number");
-    const emailAddress = screen.getByLabelText("Email address");
-    const ConfirmPassword = screen.getByLabelText("Confirm password");
-
-    await userEvent.type(password, "avanthik");
-    await userEvent.type(ConfirmPassword, "avanthik");
-    await userEvent.type(firstName, "avanthik");
-    await userEvent.type(phoneNo, "0000999909");
-    await userEvent.type(emailAddress, "avnthik@gmail.com");
-
+    const inputText = [
+      "avanthik@gmail.com",
+      "avanthik",
+      "avanthik",
+      "avanthik",
+      "0099090909",
+    ];
+    for (let i = 0; i < labelNames.length; i++) {
+      const item = screen.getByLabelText(labelNames[i]);
+      await userEvent.type(item, inputText[i]);
+    }
     const button = screen.getByRole("button");
     expect(button).not.toBeDisabled();
-
     const form = screen.getByRole("form");
     await fireEvent.submit(form);
     expect(mockSignup).toHaveBeenCalledTimes(1);
@@ -118,26 +112,17 @@ describe("Signup component", () => {
       signup: mockSignup,
     });
     userEvent.setup();
-    render(<Signup />, { wrapper: BrowserRouter });
+    renderSignup();
 
-    const password = screen.getByLabelText("Password");
-    const firstName = screen.getByLabelText("First name");
-    const phoneNo = screen.getByLabelText("Phone number");
-    const emailAddress = screen.getByLabelText("Email address");
-    const ConfirmPassword = screen.getByLabelText("Confirm password");
-
-    fireEvent.change(password, { target: { value: "" } });
-    fireEvent.change(firstName, { target: { value: "" } });
-    fireEvent.change(phoneNo, { target: { value: "" } });
-    fireEvent.change(emailAddress, { target: { value: "" } });
-    fireEvent.change(ConfirmPassword, { target: { value: "" } });
-
+    for (let i = 0; i < labelNames.length; i++) {
+      const item = screen.getByLabelText(labelNames[i]);
+      await fireEvent.change(item, { target: { value: "" } });
+    }
     const form = screen.getByRole("form");
     const button = screen.getByRole("button");
     const progressBar = screen.getByRole("progressbar");
     expect(button).toBeDisabled();
     expect(progressBar).toBeInTheDocument();
-
     await fireEvent.submit(form);
     expect(mockSignup).not.toHaveBeenCalled();
   });
