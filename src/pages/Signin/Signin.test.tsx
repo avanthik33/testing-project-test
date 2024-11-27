@@ -6,8 +6,12 @@ import userEvent from "@testing-library/user-event";
 import Signin from "./SIgnin";
 
 describe("Signin component", () => {
-  it("should show heading 'Sign in to our platform'", () => {
+  const renderSignin = () => {
     render(<Signin />, { wrapper: BrowserRouter });
+  };
+
+  it("should show heading 'Sign in to our platform'", () => {
+    renderSignin();
     const heading = screen.getByRole("heading", {
       name: "Sign in to our platform",
     });
@@ -15,16 +19,20 @@ describe("Signin component", () => {
   });
 
   it("should display the singin form", () => {
-    render(<Signin />, { wrapper: BrowserRouter });
+    renderSignin();
+
     const emailField = screen.getByLabelText("Your email");
+    expect(emailField).toBeInTheDocument();
+
     const passwordField = screen.getByLabelText("Your password");
+    expect(passwordField).toBeInTheDocument();
+
     const button = screen.getByRole("button", {
       name: "Login to your account",
     });
-    const link = screen.getByRole("link", { name: "Create account" });
-    expect(emailField).toBeInTheDocument();
-    expect(passwordField).toBeInTheDocument();
     expect(button).toBeInTheDocument();
+
+    const link = screen.getByRole("link", { name: "Create account" });
     expect(link).toBeInTheDocument();
   });
 
@@ -35,13 +43,11 @@ describe("Signin component", () => {
       error: "somthing error",
       signin: mockAddpro,
     });
-    render(<Signin />, { wrapper: BrowserRouter });
+    renderSignin();
 
     const signinForm = screen.getByRole("form");
     await fireEvent.submit(signinForm);
-
     expect(mockAddpro).toHaveBeenCalledTimes(1);
-
     expect(screen.getByText("somthing error")).toBeInTheDocument();
   });
 
@@ -52,11 +58,10 @@ describe("Signin component", () => {
       error: "somthing error",
       signin: mockSignin,
     });
-    render(<Signin />, { wrapper: BrowserRouter });
+    renderSignin();
 
     const signinForm = screen.getByRole("form");
     await fireEvent.submit(signinForm);
-
     expect(screen.getByText("somthing error")).toBeInTheDocument();
   });
 
@@ -67,7 +72,7 @@ describe("Signin component", () => {
       error: "somthing error",
       signin: mockSignin,
     });
-    render(<Signin />, { wrapper: BrowserRouter });
+    renderSignin();
 
     const signinForm = screen.getByRole("form");
     const button = screen.getByRole("button");
@@ -79,15 +84,14 @@ describe("Signin component", () => {
 
   it("should check handlInputChange fn", async () => {
     userEvent.setup();
-    render(<Signin />, { wrapper: BrowserRouter });
+    renderSignin();
 
     const emailField = screen.getByLabelText("Your email");
-    const passwordField = screen.getByLabelText("Your password");
-
     await userEvent.type(emailField, "product1");
-    await userEvent.type(passwordField, "product 1 description");
-
     expect(emailField).toHaveValue("product1");
+
+    const passwordField = screen.getByLabelText("Your password");
+    await userEvent.type(passwordField, "product 1 description");
     expect(passwordField).toHaveValue("product 1 description");
   });
 
@@ -98,15 +102,16 @@ describe("Signin component", () => {
       error: "",
       signin: mockSignin,
     });
-    render(<Signin />, { wrapper: BrowserRouter });
+    renderSignin();
     screen.debug();
 
     const emailField = screen.getByLabelText("Your email");
-    const passwordField = screen.getByLabelText("Your password");
-    const button = screen.getByRole("button");
-
     await fireEvent.change(emailField, { target: { value: "" } });
+
+    const passwordField = screen.getByLabelText("Your password");
     await fireEvent.change(passwordField, { target: { value: "" } });
+
+    const button = screen.getByRole("button");
     expect(button).toBeDisabled();
 
     await fireEvent.change(emailField, { target: { value: "hello" } });
