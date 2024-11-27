@@ -1,8 +1,8 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { SignUpFormData } from "../../interfaces";
-import { useSignup } from "../../hooks/useSignup";
-import Error from "../../components/Error/Error";
+import { useSignup } from "../../hooks/useSignup/useSignup";
+import Error from "../../components/Error/Error/Error";
 import { validateUserInput } from "../../utils";
 import CircularProgress from "@mui/material/CircularProgress";
 
@@ -28,6 +28,19 @@ const Signup: React.FC = () => {
     const isvalidated = validateUserInput(formData);
     if (isvalidated) signup();
   };
+
+  useEffect(() => {
+    if (error) {
+      setFormData({
+        username: "",
+        email: "",
+        password: "",
+        phone: "",
+        confirmPassword: "",
+      });
+    }
+  }, [error]);
+  console.log(error.length);
 
   return (
     <>
@@ -113,7 +126,7 @@ const Signup: React.FC = () => {
                   First name
                 </label>
               </div>
-              <div className="relative z-0 w-full mb-5 group">
+              {/* <div className="relative z-0 w-full mb-5 group">
                 <input
                   type="text"
                   name="lastname"
@@ -129,10 +142,10 @@ const Signup: React.FC = () => {
                 >
                   Last name
                 </label>
-              </div>
+              </div> */}
             </div>
             <div className="grid md:grid-cols-2 md:gap-6">
-              <div className="relative z-0 w-full mb-5 group">
+              <div className="relative z-0 w-full mb-5 group ">
                 <input
                   type="text"
                   name="phone"
@@ -149,7 +162,7 @@ const Signup: React.FC = () => {
                   Phone number
                 </label>
               </div>
-              <div className="relative z-0 w-full mb-5 group">
+              {/* <div className="relative z-0 w-full mb-5 group">
                 <input
                   type="text"
                   name="floating_company"
@@ -164,7 +177,7 @@ const Signup: React.FC = () => {
                 >
                   Company
                 </label>
-              </div>
+              </div> */}
             </div>
             <button
               type="submit"

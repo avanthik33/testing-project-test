@@ -2,7 +2,7 @@ import { act, renderHook } from "@testing-library/react";
 import { describe, expect, it, vi } from "vitest";
 import { useProduct } from "./useProduct";
 import { BrowserRouter } from "react-router-dom";
-import { server } from "../mocks/server";
+import { server } from "../../mocks/server";
 import { http, HttpResponse } from "msw";
 
 describe("useProduct hook", () => {
@@ -77,8 +77,6 @@ describe("useProduct hook", () => {
       await result.current.addProduct();
     });
 
-    expect(result.current.error).toBe(
-      "somthing went wrong in fetching products"
-    );
+    expect(result.current.error).toBe("server error");
   });
 });

@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { SignUpFormData } from "../interfaces";
+import { SignUpFormData } from "../../interfaces";
 
 export interface useSignupData {
   username: string;
@@ -34,7 +34,7 @@ export const useSignup = ({ username, email, password }: SignUpFormData) => {
         setError(
           error.response?.data.message
             ? error.response?.data.message
-            : "somthing went wrong in signup"
+            : "server error"
         );
       }
     } finally {

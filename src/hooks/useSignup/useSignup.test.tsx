@@ -2,7 +2,7 @@ import { act, renderHook } from "@testing-library/react";
 import { describe, expect, it, vi } from "vitest";
 import { useSignup } from "./useSignup";
 import { BrowserRouter } from "react-router-dom";
-import { server } from "../mocks/server";
+import { server } from "../../mocks/server";
 import { http, HttpResponse } from "msw";
 
 describe("UseSignup", () => {
@@ -121,6 +121,6 @@ describe("UseSignup", () => {
       await result.current.signup();
     });
 
-    expect(result.current.error).toBe("somthing went wrong in signup");
+    expect(result.current.error).toBe("server error");
   });
 });

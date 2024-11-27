@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useState } from "react";
-import { Products } from "../interfaces";
+import { Products } from "../../interfaces";
 
 export const useProduct = ({ name, description }: Products) => {
   const [loading, setLoading] = useState(false);
@@ -34,7 +34,7 @@ export const useProduct = ({ name, description }: Products) => {
         setError(
           error.response?.data.message
             ? error.response.data?.message
-            : "somthing went wrong in fetching products"
+            : "server error"
         );
       }
     } finally {

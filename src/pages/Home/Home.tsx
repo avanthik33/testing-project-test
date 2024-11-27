@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import Error from "../../components/Error/Error";
-import { useProduct } from "../../hooks/useProduct";
-import Logout from "../../components/Logout";
+import Error from "../../components/Error/Error/Error";
+import Logout from "../../components/Logout/Logout";
 import { Products } from "../../interfaces";
+import { useProduct } from "../../hooks/useProduct/useProduct";
 
 const Home: React.FC = () => {
   console.log("<Home>");
@@ -10,9 +10,7 @@ const Home: React.FC = () => {
     name: "",
     description: "",
   });
-  const { error, loading, addProduct } = useProduct({
-    formData,
-  });
+  const { error, loading, addProduct } = useProduct(formData);
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setFormData((prevInput) => ({

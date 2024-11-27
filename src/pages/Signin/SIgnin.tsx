@@ -1,16 +1,16 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { signinFormData } from "../../interfaces";
-import { useSignin } from "../../hooks/useSignin";
-import Error from "../../components/Error/Error";
+import Error from "../../components/Error/Error/Error";
 import CircularProgress from "@mui/material/CircularProgress";
+import { useSignin } from "../../hooks/useSignin/useSignin";
 
 const Signin: React.FC = () => {
   const [formData, setFormdata] = useState<signinFormData>({
     email: "",
     password: "",
   });
-  const { error, loading, signin } = useSignin({ formData });
+  const { error, loading, signin } = useSignin(formData);
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setFormdata((prevInput) => ({
@@ -22,7 +22,6 @@ const Signin: React.FC = () => {
   const formSubmitHandler = async (event: React.FormEvent) => {
     event.preventDefault();
     signin();
-    alert("hello");
   };
 
   return (
