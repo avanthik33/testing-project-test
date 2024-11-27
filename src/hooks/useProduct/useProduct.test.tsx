@@ -28,7 +28,7 @@ describe("useProduct hook", () => {
 
   it("should show error message when there is an error", async () => {
     server.use(
-      http.post("http://localhost:3001/products/addProduct", () => {
+      http.post(`${import.meta.env.VITE_API}products/addProduct`, () => {
         return HttpResponse.json({
           status: "error",
           message: "validation error",
@@ -56,7 +56,7 @@ describe("useProduct hook", () => {
 
   it("should show the error from server", async () => {
     server.use(
-      http.post("http://localhost:3001/products/addProduct", () => {
+      http.post(`${import.meta.env.VITE_API}products/addProduct`, () => {
         return HttpResponse.json(
           {
             status: "error",

@@ -6,18 +6,22 @@ import Home from "./Home";
 import { BrowserRouter } from "react-router-dom";
 
 describe("Home component", () => {
-  it("should show add product heading", () => {
+  const renderHome = () => {
     render(<Home />, { wrapper: BrowserRouter });
+  };
+
+  it("should show add product heading", () => {
+    renderHome();
     const heading = screen.getByRole("heading", { name: "Add Product" });
     expect(heading).toBeInTheDocument();
   });
 
   it("should show the addproduct form", () => {
-    render(<Home />, { wrapper: BrowserRouter });
-
+    renderHome();
     const name = screen.getByLabelText("Product Name");
-    const description = screen.getByLabelText("Description");
     expect(name).toBeInTheDocument();
+
+    const description = screen.getByLabelText("Description");
     expect(description).toBeInTheDocument();
 
     const addButton = screen.getByRole("button", { name: "Add Product" });
@@ -26,15 +30,14 @@ describe("Home component", () => {
 
   it("should check handlInputChange fn", async () => {
     userEvent.setup();
-    render(<Home />, { wrapper: BrowserRouter });
+    renderHome();
 
     const nameField = screen.getByLabelText("Product Name");
-    const descriptionField = screen.getByLabelText("Description");
-
     await userEvent.type(nameField, "product1");
-    await userEvent.type(descriptionField, "product 1 description");
-
     expect(nameField).toHaveValue("product1");
+
+    const descriptionField = screen.getByLabelText("Description");
+    await userEvent.type(descriptionField, "product 1 description");
     expect(descriptionField).toHaveValue("product 1 description");
   });
 
@@ -46,10 +49,15 @@ describe("Home component", () => {
       error: "",
       addProduct: mockAddFn,
     });
-    render(<Home />, { wrapper: BrowserRouter });
-    const button = screen.getByRole("button", { name: "Add Product" });
+    renderHome();
+
     const nameFiled = screen.getByLabelText("Product Name");
     const descriptionField = screen.getByLabelText("Description");
+
+    await userEvent.type(nameFiled, "product1");
+    await userEvent.type(descriptionField, "product 1 description");
+
+    const button = screen.getByRole("button", { name: "Add Product" });
     await userEvent.click(button);
 
     expect(mockAddFn).toHaveBeenCalledTimes(1);
@@ -65,7 +73,8 @@ describe("Home component", () => {
       addProduct: mockAddfn,
     });
     userEvent.setup();
-    render(<Home />, { wrapper: BrowserRouter });
+    renderHome();
+    
     const button = screen.getByRole("button", { name: "Add Product" });
     await userEvent.click(button);
     const errorMessage = screen.getByText("somthing error");
@@ -80,7 +89,7 @@ describe("Home component", () => {
       error: "",
     });
     userEvent.setup();
-    render(<Home />, { wrapper: BrowserRouter });
+    renderHome();
     const button = screen.getByRole("button", { name: /add product/i });
     await userEvent.click(button);
     expect(button).toBeDisabled();
