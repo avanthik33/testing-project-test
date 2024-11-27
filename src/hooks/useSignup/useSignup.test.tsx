@@ -1,25 +1,23 @@
 import { act, renderHook } from "@testing-library/react";
-import { describe, expect, it, vi } from "vitest";
+import { describe, expect, it } from "vitest";
 import { useSignup } from "./useSignup";
 import { BrowserRouter } from "react-router-dom";
 import { server } from "../../mocks/server";
 import { http, HttpResponse } from "msw";
 
 describe("UseSignup", () => {
+  const userData = {
+    username: "avanthik",
+    email: "avanthik@gmail.com",
+    password: "avanthik",
+    phone: "908809000",
+    confirmPassword: "avanthik",
+  };
+
   it("should successfully signup with msw", async () => {
-    const { result } = renderHook(
-      () =>
-        useSignup({
-          username: "avanthik",
-          email: "avanthik@gmail.com",
-          password: "avanthik",
-          phone: "908809000",
-          confirmPassword: "avanthik",
-        }),
-      {
-        wrapper: BrowserRouter,
-      }
-    );
+    const { result } = renderHook(() => useSignup(userData), {
+      wrapper: BrowserRouter,
+    });
 
     await act(async () => {
       await result.current.signup();
@@ -32,7 +30,7 @@ describe("UseSignup", () => {
 
   it("Should handle signup failure with msw", async () => {
     server.use(
-      http.post("http://localhost:3001/user/register", () => {
+      http.post(`${import.meta.env.VITE_API}user/register`, () => {
         return HttpResponse.json(
           {
             status: "error",
@@ -43,19 +41,9 @@ describe("UseSignup", () => {
       })
     );
 
-    const { result } = renderHook(
-      () =>
-        useSignup({
-          username: "avanthik",
-          email: "avanthik@gmail.com",
-          password: "avanthik",
-          phone: "908809000",
-          confirmPassword: "avanthik",
-        }),
-      {
-        wrapper: BrowserRouter,
-      }
-    );
+    const { result } = renderHook(() => useSignup(userData), {
+      wrapper: BrowserRouter,
+    });
 
     await act(async () => {
       await result.current.signup();
@@ -66,7 +54,7 @@ describe("UseSignup", () => {
 
   it("should show error message 'Signup failed. Please try again.", async () => {
     server.use(
-      http.post("http://localhost:3001/user/register", () => {
+      http.post(`${import.meta.env.VITE_API}user/register`, () => {
         return HttpResponse.json({
           status: "error",
           message: "somthing error",
@@ -74,17 +62,9 @@ describe("UseSignup", () => {
       })
     );
 
-    const { result } = renderHook(
-      () =>
-        useSignup({
-          username: "avanthik",
-          email: "avanthik@gmail.com",
-          password: "avanthik",
-          phone: "908809000",
-          confirmPassword: "avanthik",
-        }),
-      { wrapper: BrowserRouter }
-    );
+    const { result } = renderHook(() => useSignup(userData), {
+      wrapper: BrowserRouter,
+    });
 
     await act(async () => {
       await result.current.signup();
@@ -95,7 +75,7 @@ describe("UseSignup", () => {
 
   it("should show error message when there is no message from the server", async () => {
     server.use(
-      http.post("http://localhost:3001/user/register", () => {
+      http.post(`${import.meta.env.VITE_API}user/register`, () => {
         return HttpResponse.json(
           { status: "error" },
           {
@@ -105,17 +85,9 @@ describe("UseSignup", () => {
       })
     );
 
-    const { result } = renderHook(
-      () =>
-        useSignup({
-          username: "avanthik",
-          email: "avanthik@gmail.com",
-          password: "avanthik",
-          phone: "908809000",
-          confirmPassword: "avanthik",
-        }),
-      { wrapper: BrowserRouter }
-    );
+    const { result } = renderHook(() => useSignup(userData), {
+      wrapper: BrowserRouter,
+    });
 
     await act(async () => {
       await result.current.signup();

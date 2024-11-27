@@ -3,19 +3,13 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { SignUpFormData } from "../../interfaces";
 
-export interface useSignupData {
-  username: string;
-  email: string;
-  password: string;
-}
-
 export const useSignup = ({ username, email, password }: SignUpFormData) => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const navigate = useNavigate();
 
   const signup = async () => {
-    const Api = "http://localhost:3001/user/register";
+    const Api = `${import.meta.env.VITE_API}user/register`;
 
     try {
       setLoading(true);
