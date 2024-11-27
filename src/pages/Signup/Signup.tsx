@@ -14,7 +14,7 @@ const Signup: React.FC = () => {
     phone: "",
     confirmPassword: "",
   });
-  const { error, loading, signup } = useSignup({ formData });
+  const { error, loading, signup } = useSignup(formData);
 
   const inputHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
     setFormData((prevData) => ({
@@ -25,10 +25,6 @@ const Signup: React.FC = () => {
 
   const formSubmitHandler = (event: React.FormEvent) => {
     event.preventDefault();
-    if (formData.password !== formData.confirmPassword) {
-      alert("password and confirm password in not match!");
-      return;
-    }
     const isvalidated = validateUserInput(formData);
     if (isvalidated) signup();
   };

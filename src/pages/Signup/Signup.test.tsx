@@ -63,23 +63,6 @@ describe("Signup component", () => {
     expect(company).toHaveValue("gppgle");
   });
 
-  it("should display error message when confirm passworn != password", async () => {
-    const alertFn = vi.fn();
-    global.alert = alertFn;
-    userEvent.setup();
-    render(<Signup />, { wrapper: BrowserRouter });
-    const password = screen.getByLabelText("Password");
-    const ConfirmPassword = screen.getByLabelText("Confirm password");
-    const form = screen.getByRole("form");
-
-    await userEvent.type(password, "avanthik");
-    await userEvent.type(ConfirmPassword, "wrong");
-    await fireEvent.submit(form);
-    expect(alertFn).toHaveBeenCalledWith(
-      "password and confirm password in not match!"
-    );
-  });
-
   it("should not submit signup form when not validated", async () => {
     const mockSignup = vi.fn();
     vi.spyOn(signupHook, "useSignup").mockReturnValue({

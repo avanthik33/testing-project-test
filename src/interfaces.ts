@@ -36,3 +36,4 @@ export interface ProductsProps {
 export interface ProtectedRouteProps {
   children: ReactNode;
 }
+
