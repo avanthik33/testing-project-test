@@ -1,49 +1,90 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1732693065501" clover="3.2.0">
-  <project timestamp="1732693065501" name="All files">
-    <metrics statements="54" coveredstatements="47" conditionals="8" coveredconditionals="8" methods="2" coveredmethods="2" elements="64" coveredelements="57" complexity="0" loc="54" ncloc="54" packages="2" files="3" classes="3"/>
-    <package name="hooks">
-      <metrics statements="32" coveredstatements="32" conditionals="7" coveredconditionals="7" methods="2" coveredmethods="2"/>
-      <file name="useSignin.tsx" path="/home/bititude/avanthik/Testing project -test/src/hooks/useSignin.tsx">
-        <metrics statements="32" coveredstatements="32" conditionals="7" coveredconditionals="7" methods="2" coveredmethods="2"/>
+<coverage generated="1732698761382" clover="3.2.0">
+  <project timestamp="1732698761382" name="All files">
+    <metrics statements="160" coveredstatements="141" conditionals="13" coveredconditionals="12" methods="8" coveredmethods="7" elements="181" coveredelements="160" complexity="0" loc="160" ncloc="160" packages="5" files="6" classes="6"/>
+    <package name="components">
+      <metrics statements="16" coveredstatements="13" conditionals="1" coveredconditionals="1" methods="2" coveredmethods="1"/>
+      <file name="Logout.tsx" path="/home/bititude/avanthik/Testing project -test/src/components/Logout.tsx">
+        <metrics statements="16" coveredstatements="13" conditionals="1" coveredconditionals="1" methods="2" coveredmethods="1"/>
         <line num="1" count="1" type="stmt"/>
-        <line num="6" count="1" type="cond" truecount="1" falsecount="0"/>
-        <line num="7" count="8" type="stmt"/>
-        <line num="8" count="8" type="stmt"/>
-        <line num="9" count="8" type="stmt"/>
-        <line num="11" count="8" type="cond" truecount="1" falsecount="0"/>
-        <line num="12" count="4" type="stmt"/>
-        <line num="13" count="4" type="stmt"/>
-        <line num="14" count="4" type="stmt"/>
-        <line num="15" count="4" type="cond" truecount="1" falsecount="0"/>
-        <line num="16" count="4" type="cond" truecount="1" falsecount="0"/>
-        <line num="17" count="1" type="stmt"/>
-        <line num="18" count="1" type="stmt"/>
-        <line num="19" count="1" type="stmt"/>
-        <line num="20" count="1" type="stmt"/>
-        <line num="21" count="1" type="stmt"/>
+        <line num="2" count="1" type="stmt"/>
+        <line num="4" count="1" type="cond" truecount="1" falsecount="0"/>
+        <line num="5" count="37" type="stmt"/>
+        <line num="6" count="37" type="stmt"/>
+        <line num="7" count="0" type="stmt"/>
+        <line num="8" count="0" type="stmt"/>
+        <line num="9" count="0" type="stmt"/>
+        <line num="10" count="37" type="stmt"/>
+        <line num="11" count="37" type="stmt"/>
+        <line num="12" count="37" type="stmt"/>
+        <line num="13" count="37" type="stmt"/>
+        <line num="14" count="37" type="stmt"/>
+        <line num="15" count="37" type="stmt"/>
+        <line num="20" count="37" type="stmt"/>
         <line num="22" count="1" type="stmt"/>
-        <line num="23" count="1" type="stmt"/>
-        <line num="24" count="1" type="stmt"/>
-        <line num="25" count="4" type="cond" truecount="1" falsecount="0"/>
-        <line num="26" count="2" type="stmt"/>
-        <line num="27" count="2" type="stmt"/>
-        <line num="28" count="2" type="cond" truecount="1" falsecount="0"/>
-        <line num="29" count="1" type="cond" truecount="1" falsecount="0"/>
+      </file>
+    </package>
+    <package name="components.Error">
+      <metrics statements="8" coveredstatements="8" conditionals="1" coveredconditionals="1" methods="1" coveredmethods="1"/>
+      <file name="Error.tsx" path="/home/bititude/avanthik/Testing project -test/src/components/Error/Error.tsx">
+        <metrics statements="8" coveredstatements="8" conditionals="1" coveredconditionals="1" methods="1" coveredmethods="1"/>
+        <line num="1" count="1" type="stmt"/>
+        <line num="4" count="1" type="cond" truecount="1" falsecount="0"/>
+        <line num="5" count="2" type="stmt"/>
+        <line num="6" count="2" type="stmt"/>
+        <line num="7" count="2" type="stmt"/>
+        <line num="8" count="2" type="stmt"/>
+        <line num="12" count="2" type="stmt"/>
+        <line num="14" count="1" type="stmt"/>
+      </file>
+    </package>
+    <package name="hooks">
+      <metrics statements="37" coveredstatements="36" conditionals="6" coveredconditionals="5" methods="2" coveredmethods="2"/>
+      <file name="useProduct.tsx" path="/home/bititude/avanthik/Testing project -test/src/hooks/useProduct.tsx">
+        <metrics statements="37" coveredstatements="36" conditionals="6" coveredconditionals="5" methods="2" coveredmethods="2"/>
+        <line num="1" count="1" type="stmt"/>
+        <line num="5" count="1" type="cond" truecount="1" falsecount="0"/>
+        <line num="6" count="38" type="stmt"/>
+        <line num="7" count="38" type="stmt"/>
+        <line num="9" count="38" type="stmt"/>
+        <line num="11" count="38" type="cond" truecount="1" falsecount="0"/>
+        <line num="12" count="3" type="stmt"/>
+        <line num="13" count="3" type="stmt"/>
+        <line num="14" count="3" type="stmt"/>
+        <line num="15" count="3" type="stmt"/>
+        <line num="16" count="3" type="stmt"/>
+        <line num="17" count="3" type="stmt"/>
+        <line num="18" count="3" type="stmt"/>
+        <line num="19" count="3" type="stmt"/>
+        <line num="20" count="3" type="stmt"/>
+        <line num="21" count="3" type="stmt"/>
+        <line num="22" count="3" type="stmt"/>
+        <line num="23" count="3" type="cond" truecount="1" falsecount="0"/>
+        <line num="26" count="3" type="cond" truecount="1" falsecount="0"/>
+        <line num="27" count="1" type="stmt"/>
+        <line num="28" count="1" type="stmt"/>
+        <line num="29" count="1" type="stmt"/>
         <line num="30" count="1" type="stmt"/>
-        <line num="32" count="2" type="stmt"/>
-        <line num="33" count="4" type="stmt"/>
-        <line num="34" count="4" type="stmt"/>
-        <line num="35" count="4" type="stmt"/>
-        <line num="36" count="4" type="stmt"/>
-        <line num="37" count="8" type="stmt"/>
-        <line num="38" count="8" type="stmt"/>
+        <line num="31" count="1" type="stmt"/>
+        <line num="32" count="3" type="cond" truecount="1" falsecount="0"/>
+        <line num="33" count="1" type="stmt"/>
+        <line num="34" count="1" type="stmt"/>
+        <line num="35" count="1" type="cond" truecount="0" falsecount="1"/>
+        <line num="36" count="0" type="stmt"/>
+        <line num="37" count="1" type="stmt"/>
+        <line num="39" count="1" type="stmt"/>
+        <line num="40" count="3" type="stmt"/>
+        <line num="41" count="3" type="stmt"/>
+        <line num="42" count="3" type="stmt"/>
+        <line num="43" count="3" type="stmt"/>
+        <line num="45" count="38" type="stmt"/>
+        <line num="46" count="38" type="stmt"/>
       </file>
     </package>
     <package name="mocks">
-      <metrics statements="22" coveredstatements="15" conditionals="1" coveredconditionals="1" methods="0" coveredmethods="0"/>
+      <metrics statements="30" coveredstatements="15" conditionals="1" coveredconditionals="1" methods="0" coveredmethods="0"/>
       <file name="handlers.ts" path="/home/bititude/avanthik/Testing project -test/src/mocks/handlers.ts">
-        <metrics statements="20" coveredstatements="13" conditionals="1" coveredconditionals="1" methods="0" coveredmethods="0"/>
+        <metrics statements="28" coveredstatements="13" conditionals="1" coveredconditionals="1" methods="0" coveredmethods="0"/>
         <line num="1" count="1" type="stmt"/>
         <line num="3" count="1" type="stmt"/>
         <line num="4" count="1" type="stmt"/>
@@ -54,21 +95,104 @@
         <line num="9" count="0" type="stmt"/>
         <line num="10" count="0" type="stmt"/>
         <line num="12" count="0" type="stmt"/>
-        <line num="13" count="1" type="cond" truecount="1" falsecount="0"/>
-        <line num="14" count="1" type="stmt"/>
-        <line num="15" count="1" type="stmt"/>
-        <line num="16" count="1" type="stmt"/>
-        <line num="17" count="1" type="stmt"/>
-        <line num="18" count="1" type="stmt"/>
-        <line num="19" count="1" type="stmt"/>
-        <line num="20" count="1" type="stmt"/>
-        <line num="22" count="1" type="stmt"/>
-        <line num="23" count="1" type="stmt"/>
+        <line num="13" count="1" type="stmt"/>
+        <line num="14" count="0" type="stmt"/>
+        <line num="15" count="0" type="stmt"/>
+        <line num="16" count="0" type="stmt"/>
+        <line num="17" count="0" type="stmt"/>
+        <line num="18" count="0" type="stmt"/>
+        <line num="19" count="0" type="stmt"/>
+        <line num="20" count="0" type="stmt"/>
+        <line num="22" count="0" type="stmt"/>
+        <line num="23" count="1" type="cond" truecount="1" falsecount="0"/>
+        <line num="24" count="1" type="stmt"/>
+        <line num="25" count="1" type="stmt"/>
+        <line num="26" count="1" type="stmt"/>
+        <line num="27" count="1" type="stmt"/>
+        <line num="28" count="1" type="stmt"/>
+        <line num="29" count="1" type="stmt"/>
+        <line num="31" count="1" type="stmt"/>
+        <line num="32" count="1" type="stmt"/>
       </file>
       <file name="server.ts" path="/home/bititude/avanthik/Testing project -test/src/mocks/server.ts">
         <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
         <line num="1" count="1" type="stmt"/>
         <line num="5" count="1" type="stmt"/>
+      </file>
+    </package>
+    <package name="pages.Home">
+      <metrics statements="69" coveredstatements="69" conditionals="4" coveredconditionals="4" methods="3" coveredmethods="3"/>
+      <file name="Home.tsx" path="/home/bititude/avanthik/Testing project -test/src/pages/Home/Home.tsx">
+        <metrics statements="69" coveredstatements="69" conditionals="4" coveredconditionals="4" methods="3" coveredmethods="3"/>
+        <line num="1" count="1" type="stmt"/>
+        <line num="2" count="1" type="stmt"/>
+        <line num="3" count="1" type="stmt"/>
+        <line num="4" count="1" type="stmt"/>
+        <line num="7" count="1" type="cond" truecount="1" falsecount="0"/>
+        <line num="8" count="37" type="stmt"/>
+        <line num="9" count="37" type="stmt"/>
+        <line num="10" count="37" type="stmt"/>
+        <line num="11" count="37" type="stmt"/>
+        <line num="12" count="37" type="stmt"/>
+        <line num="13" count="37" type="stmt"/>
+        <line num="14" count="37" type="stmt"/>
+        <line num="15" count="37" type="stmt"/>
+        <line num="17" count="37" type="cond" truecount="1" falsecount="0"/>
+        <line num="18" count="29" type="cond" truecount="1" falsecount="0"/>
+        <line num="19" count="29" type="stmt"/>
+        <line num="20" count="29" type="stmt"/>
+        <line num="21" count="29" type="stmt"/>
+        <line num="22" count="29" type="stmt"/>
+        <line num="24" count="37" type="cond" truecount="1" falsecount="0"/>
+        <line num="25" count="2" type="stmt"/>
+        <line num="26" count="2" type="stmt"/>
+        <line num="27" count="2" type="stmt"/>
+        <line num="28" count="2" type="stmt"/>
+        <line num="29" count="2" type="stmt"/>
+        <line num="30" count="2" type="stmt"/>
+        <line num="31" count="2" type="stmt"/>
+        <line num="33" count="37" type="stmt"/>
+        <line num="34" count="37" type="stmt"/>
+        <line num="35" count="37" type="stmt"/>
+        <line num="36" count="37" type="stmt"/>
+        <line num="37" count="37" type="stmt"/>
+        <line num="38" count="37" type="stmt"/>
+        <line num="41" count="37" type="stmt"/>
+        <line num="42" count="37" type="stmt"/>
+        <line num="46" count="37" type="stmt"/>
+        <line num="47" count="37" type="stmt"/>
+        <line num="48" count="37" type="stmt"/>
+        <line num="49" count="37" type="stmt"/>
+        <line num="50" count="37" type="stmt"/>
+        <line num="51" count="37" type="stmt"/>
+        <line num="54" count="37" type="stmt"/>
+        <line num="55" count="37" type="stmt"/>
+        <line num="56" count="37" type="stmt"/>
+        <line num="57" count="37" type="stmt"/>
+        <line num="58" count="37" type="stmt"/>
+        <line num="59" count="37" type="stmt"/>
+        <line num="60" count="37" type="stmt"/>
+        <line num="61" count="37" type="stmt"/>
+        <line num="64" count="37" type="stmt"/>
+        <line num="65" count="37" type="stmt"/>
+        <line num="66" count="37" type="stmt"/>
+        <line num="67" count="37" type="stmt"/>
+        <line num="68" count="37" type="stmt"/>
+        <line num="71" count="37" type="stmt"/>
+        <line num="72" count="37" type="stmt"/>
+        <line num="73" count="37" type="stmt"/>
+        <line num="74" count="37" type="stmt"/>
+        <line num="75" count="37" type="stmt"/>
+        <line num="76" count="37" type="stmt"/>
+        <line num="77" count="37" type="stmt"/>
+        <line num="78" count="37" type="stmt"/>
+        <line num="81" count="37" type="stmt"/>
+        <line num="82" count="37" type="stmt"/>
+        <line num="83" count="37" type="stmt"/>
+        <line num="84" count="37" type="stmt"/>
+        <line num="85" count="37" type="stmt"/>
+        <line num="93" count="37" type="stmt"/>
+        <line num="95" count="1" type="stmt"/>
       </file>
     </package>
   </project>

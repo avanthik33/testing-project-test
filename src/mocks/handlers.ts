@@ -20,4 +20,13 @@ export const handlers = [
       { status: 200 }
     );
   }),
+  http.post("http://localhost:3001/products/addProduct", () => {
+    return HttpResponse.json(
+      {
+        status: "success",
+        message: "successfully added new product",
+      },
+      { status: 200 }
+    );
+  }),
 ];
