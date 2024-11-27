@@ -90,4 +90,27 @@ describe("Signin component", () => {
     expect(emailField).toHaveValue("product1");
     expect(passwordField).toHaveValue("product 1 description");
   });
+
+  it("should disable the button when user not typed yet", async () => {
+    const mockSignin = vi.fn();
+    vi.spyOn(customHook, "useSignin").mockReturnValue({
+      loading: false,
+      error: "",
+      signin: mockSignin,
+    });
+    render(<Signin />, { wrapper: BrowserRouter });
+    screen.debug();
+
+    const emailField = screen.getByLabelText("Your email");
+    const passwordField = screen.getByLabelText("Your password");
+    const button = screen.getByRole("button");
+
+    await fireEvent.change(emailField, { target: { value: "" } });
+    await fireEvent.change(passwordField, { target: { value: "" } });
+    expect(button).toBeDisabled();
+
+    await fireEvent.change(emailField, { target: { value: "hello" } });
+    await fireEvent.change(passwordField, { target: { value: "hello" } });
+    expect(button).not.toBeDisabled();
+  });
 });
