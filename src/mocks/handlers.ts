@@ -10,4 +10,14 @@ export const handlers = [
       { status: 200 }
     );
   }),
+  http.post("http://localhost:3001/user/login", () => {
+    return HttpResponse.json(
+      {
+        status: "success",
+        message: "signin successfull",
+        token: "helloThisIsTokenForLogin1234",
+      },
+      { status: 200 }
+    );
+  }),
 ];
