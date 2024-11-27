@@ -22,7 +22,7 @@ const Signin: React.FC = () => {
   const formSubmitHandler = async (event: React.FormEvent) => {
     event.preventDefault();
     signin();
-    alert("hello")
+    alert("hello");
   };
 
   return (
@@ -45,6 +45,7 @@ const Signin: React.FC = () => {
                 type="email"
                 name="email"
                 id="email"
+                value={formData.email}
                 onChange={handleInputChange}
                 className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
                 placeholder="name@company.com"
@@ -61,6 +62,7 @@ const Signin: React.FC = () => {
               <input
                 type="password"
                 name="password"
+                value={formData.password}
                 id="password"
                 onChange={handleInputChange}
                 placeholder="••••••••"
