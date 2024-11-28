@@ -126,4 +126,25 @@ describe("Signup component", () => {
     await fireEvent.submit(form);
     expect(mockSignup).not.toHaveBeenCalled();
   });
+
+  it("should show error message when there is a error", async () => {
+    const mockSignup = vi.fn();
+    vi.spyOn(signupHook, "useSignup").mockReturnValue({
+      error: "somthing error",
+      loading: false,
+      signup: mockSignup,
+    });
+    userEvent.setup();
+
+    renderSignup();
+    const form = screen.getByRole("form");
+    fireEvent.submit(form);
+
+    expect(screen.getByText("somthing error")).toBeInTheDocument();
+
+    for (const name of labelNames) {
+      const input = screen.getByLabelText(name);
+      expect(input).toHaveValue("");
+    }
+  });
 });
