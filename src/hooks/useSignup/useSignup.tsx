@@ -9,7 +9,7 @@ export const useSignup = ({ username, email, password }: SignUpFormData) => {
   const navigate = useNavigate();
 
   const signup = async () => {
-    const Api = `${import.meta.env.VITE_API}user/register`;
+    const Api = `${import.meta.env.VITE_USER_REGISTER_API}`;
 
     try {
       setLoading(true);

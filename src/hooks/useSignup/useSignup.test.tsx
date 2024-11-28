@@ -30,7 +30,7 @@ describe("UseSignup", () => {
 
   it("Should handle signup failure with msw", async () => {
     server.use(
-      http.post(`${import.meta.env.VITE_API}user/register`, () => {
+      http.post(`${import.meta.env.VITE_USER_REGISTER_API}`, () => {
         return HttpResponse.json(
           {
             status: "error",
@@ -54,7 +54,7 @@ describe("UseSignup", () => {
 
   it("should show error message 'Signup failed. Please try again.", async () => {
     server.use(
-      http.post(`${import.meta.env.VITE_API}user/register`, () => {
+      http.post(`${import.meta.env.VITE_USER_REGISTER_API}`, () => {
         return HttpResponse.json({
           status: "error",
           message: "somthing error",
@@ -75,7 +75,7 @@ describe("UseSignup", () => {
 
   it("should show error message when there is no message from the server", async () => {
     server.use(
-      http.post(`${import.meta.env.VITE_API}user/register`, () => {
+      http.post(`${import.meta.env.VITE_USER_REGISTER_API}`, () => {
         return HttpResponse.json(
           { status: "error" },
           {

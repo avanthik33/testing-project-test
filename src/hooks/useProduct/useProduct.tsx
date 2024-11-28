@@ -9,7 +9,7 @@ export const useProduct = ({ name, description }: Products) => {
   const token = localStorage.getItem("token");
 
   const addProduct = async () => {
-    const Api = `${import.meta.env.VITE_API}products/addProduct`;
+    const Api = `${import.meta.env.VITE_ADD_PRODUCT_API}`;
     try {
       setLoading(true);
       const response = await axios.post(

@@ -1,7 +1,10 @@
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
+import { ProtectedRouteProps } from "../interfaces";
 
-const RedirectIfAuthenticated = ({ children }) => {
+const RedirectIfAuthenticated: React.FC<ProtectedRouteProps> = ({
+  children,
+}) => {
   const navigate = useNavigate();
 
   const isAuthenticated = localStorage.getItem("token");
