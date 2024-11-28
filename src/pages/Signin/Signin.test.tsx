@@ -62,7 +62,13 @@ describe("Signin component", () => {
 
     const signinForm = screen.getByRole("form");
     await fireEvent.submit(signinForm);
+
     expect(screen.getByText("somthing error")).toBeInTheDocument();
+
+    const emailField = screen.getByLabelText("Your email");
+    expect(emailField).toHaveValue("");
+    const passwordField = screen.getByLabelText("Your password");
+    expect(passwordField).toHaveValue("");
   });
 
   it("should disable button when loading ", async () => {
