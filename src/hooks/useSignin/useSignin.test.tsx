@@ -26,7 +26,7 @@ describe("useSignin hook", () => {
 
   it("should show error message when there is a error", async () => {
     server.use(
-      http.post(`${import.meta.env.VITE_API}user/login`, () => {
+      http.post(`${import.meta.env.VITE_USER_LOGIN_API}`, () => {
         return HttpResponse.json(
           {
             status: "error",
@@ -55,7 +55,7 @@ describe("useSignin hook", () => {
 
   it("should show the error message 'Login failed. Please try again.'", async () => {
     server.use(
-      http.post(`${import.meta.env.VITE_API}user/login`, () => {
+      http.post(`${import.meta.env.VITE_USER_LOGIN_API}`, () => {
         return HttpResponse.json({
           status: "error",
           message: "somthing error",
@@ -81,7 +81,7 @@ describe("useSignin hook", () => {
 
   it("should display the error message when there is no message from server", async () => {
     server.use(
-      http.post(`${import.meta.env.VITE_API}user/login`, () => {
+      http.post(`${import.meta.env.VITE_USER_LOGIN_API}`, () => {
         return HttpResponse.json({ status: "error" }, { status: 400 });
       })
     );

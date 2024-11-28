@@ -1,7 +1,7 @@
 import { http, HttpResponse } from "msw";
 
 export const handlers = [
-  http.post(`${import.meta.env.VITE_API}user/register`, () => {
+  http.post(`${import.meta.env.VITE_USER_REGISTER_API}`, () => {
     return HttpResponse.json(
       {
         status: "success",
@@ -10,7 +10,7 @@ export const handlers = [
       { status: 200 }
     );
   }),
-  http.post(`${import.meta.env.VITE_API}user/login`, () => {
+  http.post(`${import.meta.env.VITE_USER_LOGIN_API}`, () => {
     return HttpResponse.json(
       {
         status: "success",
@@ -20,7 +20,7 @@ export const handlers = [
       { status: 200 }
     );
   }),
-  http.post(`${import.meta.env.VITE_API}products/addProduct`, () => {
+  http.post(`${import.meta.env.VITE_ADD_PRODUCT_API}`, () => {
     return HttpResponse.json(
       {
         status: "success",

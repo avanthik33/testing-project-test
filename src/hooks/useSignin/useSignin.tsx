@@ -9,7 +9,7 @@ export const useSignin = ({ email, password }: signinFormData) => {
   const navigate = useNavigate();
 
   const signin = async () => {
-    const Api = `${import.meta.env.VITE_API}user/login`;
+    const Api = `${import.meta.env.VITE_USER_LOGIN_API}`;
     try {
       setLoading(true);
       const response = await axios.post(Api, { email, password });
